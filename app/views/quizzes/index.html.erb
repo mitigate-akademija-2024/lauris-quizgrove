@@ -1,4 +1,5 @@
 <h1><%= @title %></h1>
+<p><%= @description %></p>
 
 <div class="overflow-x-auto rounded-lg border border-gray-200">
   <table id="quizzes" class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
@@ -16,18 +17,6 @@
   </table>
 </div>
 
-
-
-
-
-<p class="mt-4">
-  <span class="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow"-sm>
-    <%= link_to new_quiz_path, class: btn_class do %>
-      New quiz
-    <% end %>
-  </span>
-</p>
-
-<p><%= @description %></p>
+<%= link_to "New quiz", new_quiz_path, class: btn_class %>
 
   

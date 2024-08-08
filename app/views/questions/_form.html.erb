@@ -1,10 +1,10 @@
 <%= form_with(model: [question.quiz, question]) do |form| %>
-  <% if quiz.errors.any? %>
+  <% if question.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
+      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
 
       <ul>
-        <% quiz.errors.each do |error| %>
+        <% question.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -17,10 +17,6 @@
   </div>
 
   <div class="mt-4">
-    <%= form.submit %>
-  </div>
-
-  <div>
     <%= form.submit %>
   </div>
 <% end %>

@@ -5,18 +5,18 @@ class QuizzesController < ApplicationController
   def index
     @quizzes = Quiz.all
 
-    @title = "Avaiable Quizzes"
-    # @description = "Select a quiz to start testing your knowledge"
+    @title = 'These are the quizzes'
+    @description = 'lorem ipsum'
   end
 
   def start
-    @title = "Start Quiz"
-    @description = "Get ready to start your quiz. Good luck!"
+    @title = 'Start some quiz'
+    @description = 'lorem ipsum'
 
     respond_to do |format|
       format.html
       format.json do
-        render json: {title: @title, description: @description}
+        render json: { title: @title, description: "Šī ir json atbilde" }
       end
     end
   end
@@ -41,7 +41,7 @@ class QuizzesController < ApplicationController
     respond_to do |format|
       if @quiz.save
         format.html do
-          flash.notice = "Quiz was succesfully created at this time."
+          flash.notice = "Quiz was successfully created this time."
           redirect_to quiz_url(@quiz)
         end
         format.json { render :show, status: :created, location: @quiz }

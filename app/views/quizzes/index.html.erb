@@ -1,18 +1,24 @@
 <h1><%= @title %></h1>
 
-<div id="quizzes">
-  <% @quizzes.each do |quiz| %>
-    <%= render quiz %>
-    <span class="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm">
-      <%= link_to edit_quiz_path(quiz), class: btn_class do %>
-        Edit
-      <% end %>
-      <%= link_to quiz_path(quiz), class: btn_class do %>
-        View
-      <% end %>
-    </span>
-  <% end %>
+<div class="overflow-x-auto rounded-lg border border-gray-200">
+  <table id="quizzes" class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+    <thead class="text-left">
+      <tr>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">ID</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nosaukums</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Apraksts</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Izveidots</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <%= render partial: 'quiz_row', collection: @quizzes, as: :quiz %>
+    </tbody>
+  </table>
 </div>
+
+
+
+
 
 <p class="mt-4">
   <span class="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow"-sm>

@@ -5,8 +5,8 @@ class QuizzesController < ApplicationController
   def index
     @quizzes = Quiz.all
 
-    @title = "Quizzes - Avaiable Quizzes"
-    @description = "Select a quiz to start testing your knowledge"
+    @title = "Avaiable Quizzes"
+    # @description = "Select a quiz to start testing your knowledge"
   end
 
   def start

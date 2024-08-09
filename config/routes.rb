@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get "/start_quiz", to: "quizzes#start"
 
   resources :quizzes do
-    resources :questions, shallow: true
+  resources :questions, shallow: true
 
     get 'continue', on: :member
     get 'completed', on: :collection

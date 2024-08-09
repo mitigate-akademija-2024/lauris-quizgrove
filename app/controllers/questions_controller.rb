@@ -7,23 +7,30 @@ class QuestionsController < ApplicationController
   def create
     @question = @quiz.questions.new(question_params)
 
-    @question.answers.new answer_text: params[:question][:answer1]
-    @question.answers.new answer_text: params[:question][:answer2]
-    @question.answers.new answer_text: params[:question][:answer3]
-
-    if @question.save
-      flash.notice = "Question was successfully created."
-      redirect_to quiz_url(@quiz)
-    else
+    if params[:commit] == "add_answer"
+      @question.answers.new
       render :new, status: :unprocessable_entity
+    else
+
+      if @question.save
+        flash.notice = "Question was successfully created."
+        redirect_to quiz_url(@quiz)
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
   end
 
   def new
     @question = @quiz.questions.new
     @question.answers.new
+  end
+
+  def add_answer
+    @question = @quiz.questions.new(question_params)
     @question.answers.new
-    @question.answers.new
+
+    render :new
   end
 
   private
@@ -33,6 +40,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:question_text)
+    params.require(:question).permit(:question_text, answers_attributes: [:id, :answer_text, :correct])
   end
 end

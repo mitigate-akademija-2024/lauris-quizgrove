@@ -10,10 +10,25 @@
   </p>
 
   <h3>Questions</h3>
-  <%= link_to 'Add question', new_quiz_question_path(@quiz) %>
-  <ol>
-    <% quiz.questions.each do |question| %>
-      <li><%= question.question_text %></li>
-    <% end %>
-  </ol>
+  <div class="overflow-x-auto rounded-lg border border-gray-200">
+    <table id="quizzes" class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+      <thead class="text-left">
+        <tr>
+          <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">Nosaukums</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <% quiz.questions.each do |question| %>
+          <tr>
+            <td class="whitespace-nowrap px-4 py-2 font-medium text-black-900"><%= question.question_text %></td>
+          </tr>
+          <% question.answers.each do |answer| %>
+            <tr>
+              <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"><%= answer.answer_text %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

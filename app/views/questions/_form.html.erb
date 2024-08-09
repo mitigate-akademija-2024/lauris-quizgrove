@@ -14,8 +14,12 @@
   <div>
     <%= form.label :question_text %>
     <%= form.text_field :question_text %>
-  </div>
 
+    <% question.answers.each_with_index do |answer, index| %>
+    <%= form.text_field "answer#{index}"%>
+    <%end%>
+  </div>
+  
   <div class="mt-4">
     <%= form.submit %>
   </div>

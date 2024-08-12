@@ -5,14 +5,18 @@ Rails.application.routes.draw do
 
   root 'quizzes#index'
 
-  get "/start_quiz", to: "quizzes#start"
-
   resources :quizzes do
-  resources :questions, shallow: true
+    member do
+      get 'start'   # Route to start the quiz (view questions)
+      post 'submit' # Route to submit the quiz (evaluate answers)
+    end
+
+    resources :questions, shallow: true
 
     get 'continue', on: :member
     get 'completed', on: :collection
   end
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

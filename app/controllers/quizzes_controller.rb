@@ -1,17 +1,18 @@
 class QuizzesController < ApplicationController
-  before_action :set_quiz, only: %i[ show edit update destroy ]
+  before_action :set_quiz, only: %i[ show edit update destroy start submit ]
 
   # GET /quizzes or /quizzes.json
   def index
     @quizzes = Quiz.all
-
     @title = 'These are the quizzes'
     @description = 'lorem ipsum'
   end
 
+  # GET /quizzes/1/start
   def start
     @title = 'Start some quiz'
-    @description = 'lorem ipsum'
+    @description = 'Something'
+    @questions = @quiz.questions.includes(:answers)  # Load questions and their answers for the quiz
 
     respond_to do |format|
       format.html
@@ -19,6 +20,24 @@ class QuizzesController < ApplicationController
         render json: { title: @title, description: "Šī ir json atbilde" }
       end
     end
+  end
+
+  # POST /quizzes/1/submit
+  def submit
+    user_answers = params[:answers] || {}
+    @correct_answers_count = 0
+
+    @quiz.questions.each do |question|
+      correct_answer = question.answers.find_by(correct: true)&.id
+      user_answer = user_answers[question.id.to_s].to_i
+
+      if correct_answer == user_answer
+        @correct_answers_count += 1
+      end
+    end
+
+    flash.notice = "You answered #{@correct_answers_count} out of #{@quiz.questions.count} questions correctly."
+    redirect_to quizzes_path
   end
 
   # GET /quizzes/1 or /quizzes/1.json
@@ -41,7 +60,7 @@ class QuizzesController < ApplicationController
     respond_to do |format|
       if @quiz.save
         format.html do
-          flash.notice = "Quiz was successfully created this time."
+          flash.notice = "Quiz was successfully created."
           redirect_to quiz_url(@quiz)
         end
         format.json { render :show, status: :created, location: @quiz }

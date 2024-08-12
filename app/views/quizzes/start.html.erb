@@ -1,1 +1,24 @@
-<h1>Sākt aptauju </h1>
+<h1><%= @quiz.title %></h1>
+<p><%= @quiz.description %></p>
+
+<%= form_with url: submit_quiz_path(@quiz), method: :post, local: true do |form| %>
+  <% @quiz.questions.each do |question| %>
+    <fieldset class="mt-4">
+      <legend class="text-lg font-semibold"><%= question.question_text %></legend>
+
+      <% question.answers.each do |answer| %>
+        <div class="mt-2">
+          <%= form.radio_button "answers[#{question.id}]", answer.id, id: "question_#{question.id}_answer_#{answer.id}" %>
+          <%= form.label "question_#{question.id}_answer_#{answer.id}", answer.answer_text %>
+        </div>
+      <% end %>
+    </fieldset>
+  <% end %>
+
+  <div class="mt-4">
+    <%= form.submit "Submit Quiz", class: "btn btn-primary" %>
+  </div>
+  <div>
+  <%= link_to "Back to quizzes", quizzes_path %>
+</div>
+<% end %>

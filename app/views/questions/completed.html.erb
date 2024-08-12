@@ -1,0 +1,8 @@
+<h1>Quiz Completed!</h1>
+<p>Thank you for completing the quiz.</p>
+
+<% if @score.present? %>
+  <p>Your score: <%= @score %></p>
+<% end %>
+
+<%= link_to "Back to Quizzes", quizzes_path, class: "btn btn-secondary" %>

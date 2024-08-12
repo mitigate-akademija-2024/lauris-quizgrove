@@ -1,5 +1,5 @@
-<h1><%= @quiz.title %></h1>
-<p><%= @quiz.description %></p>
+<h1 class="font-bold text-3xl"><%= @quiz.title %></h1>
+<p class="font-bold text-2xl"><%= @quiz.description %></p>
 
 <%= form_with url: submit_quiz_path(@quiz), method: :post, local: true do |form| %>
   <% @quiz.questions.each do |question| %>
@@ -15,11 +15,9 @@
     </fieldset>
   <% end %>
 
-  <div class="mt-4">
-    <%= form.submit "Submit Quiz", class: "btn btn-primary" %>
-  </div>
-  <div>
-    <%= link_to "Back to quizzes", quizzes_path %>
-  </div>
+<div class="mt-4 flex space-x-2">
+  <%= form.submit "Submit Quiz", class: "inline-block rounded border border-brown-500 bg-brown-500 px-4 py-2 text-sm font-medium text-white hover:bg-brown-400 focus:outline-none focus:ring active:bg-brown-300" %>
+  <%= link_to "Back to quizzes", quizzes_path, class: "inline-block rounded border border-brown-500 bg-brown-500 px-4 py-2 text-sm font-medium text-white hover:bg-brown-400 focus:outline-none focus:ring active:bg-brown-300" %>
+</div>
 <% end %>
     

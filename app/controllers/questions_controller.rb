@@ -40,9 +40,14 @@ class QuestionsController < ApplicationController
 
   def add_answer
     @question = @quiz.questions.new(question_params)
-    @question.answers.new
-
+    @question.answers.build #or new..
+  
     render :new
+  end
+
+  
+  # GET /questions/1
+  def show
   end
 
   # DELETE /questions/1

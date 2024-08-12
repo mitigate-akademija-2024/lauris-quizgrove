@@ -5,7 +5,7 @@ class QuizzesController < ApplicationController
   def index
     @quizzes = Quiz.all
     @title = 'These are the quizzes'
-    @description = 'lorem ipsum'
+    @description = ''
   end
 
   # GET /quizzes/1/start

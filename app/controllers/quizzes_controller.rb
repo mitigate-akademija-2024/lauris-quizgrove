@@ -22,27 +22,44 @@ class QuizzesController < ApplicationController
     end
   end
 
-  # POST /quizzes/1/submit
-  def submit
-    user_answers = params[:answers] || {}
-    @correct_answers_count = 0
+# POST /quizzes/1/submit
+def submit
+  user_answers = params[:answers] || {}
+  @results = []
 
-    @quiz.questions.each do |question|
-      correct_answer = question.answers.find_by(correct: true)&.id
-      user_answer = user_answers[question.id.to_s].to_i
+  @quiz.questions.each do |question|
+    correct_answer = question.answers.find_by(correct: true)
+    selected_answer_id = user_answers[question.id.to_s].to_i
+    selected_answer = question.answers.find_by(id: selected_answer_id)
 
-      if correct_answer == user_answer
-        @correct_answers_count += 1
-      end
-    end
-
-    flash.notice = "You answered #{@correct_answers_count} out of #{@quiz.questions.count} questions correctly."
-    redirect_to quizzes_path
+    @results << {
+      question: question,
+      selected_answer: selected_answer,
+      correct: correct_answer&.id == selected_answer_id
+    }
   end
+
+  # Store results in session
+  session[:quiz_results] = @results
+  session[:quiz_id] = @quiz.id
+
+  # Redirect to results page
+  redirect_to results_quiz_path(@quiz)
+end
 
   # GET /quizzes/1 or /quizzes/1.json
   def show
   end
+
+    # GET /quizzes/:id/results
+def results
+  @quiz = Quiz.find(params[:id])
+  @results = session[:quiz_results] || []
+
+  # Clear the results from the session
+  session.delete(:quiz_results)
+  session.delete(:quiz_id)
+end
 
   # GET /quizzes/new
   def new

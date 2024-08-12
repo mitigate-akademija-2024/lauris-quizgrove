@@ -1,25 +1,23 @@
 Rails.application.routes.draw do
-  get 'questions/index'
-  get 'questions/start'
-  get 'questions/test'
-
-  root 'quizzes#index'
+  root 'welcome#index'  # Sets the root path to the welcome page
 
   resources :quizzes do
     member do
-      get 'start'   # Route to start the quiz (view questions)
-      post 'submit' # Route to submit the quiz (evaluate answers)
+      get 'start'   # Route to start the quiz
+      post 'submit' # Route to submit the quiz
+      get 'results' # Route for the results page
     end
 
     resources :questions, shallow: true
-
     get 'continue', on: :member
     get 'completed', on: :collection
   end
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Additional routes if needed
+  get 'welcome/index' # Ensure this route exists
+  get 'questions/index'
+  get 'questions/start'
+  get 'questions/test'
+  get 'quizzes/results', to: 'quizzes#results', as: 'results'
   get "up" => "rails/health#show", as: :rails_health_check
 end

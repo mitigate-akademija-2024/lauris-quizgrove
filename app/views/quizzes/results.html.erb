@@ -1,0 +1,36 @@
+<h1>Quiz Results</h1>
+
+<%= link_to "Back to Quizzes", quizzes_path, class: "btn btn-secondary" %>
+
+<% if @results.present? %>
+  <div class="mt-4">
+    <% @results.each do |result| %>
+      <% if result[:question].present? %>
+        <fieldset class="mt-4">
+          <legend class="text-lg font-semibold"><%= result[:question].question_text %></legend>
+
+          <% result[:question].answers.each do |answer| %>
+            <div class="mt-2">
+              <%= answer.answer_text %>
+              <% if answer.id == result[:selected_answer]&.id %>
+                <strong>
+                  <% if result[:correct] %>
+                    (Correct)
+                  <% else %>
+                    (Incorrect)
+                  <% end %>
+                </strong>
+              <% end %>
+            </div>
+          <% end %>
+        </fieldset>
+      <% else %>
+        <p>Question data is missing.</p>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <p>No results available.</p>
+<% end %>
+
+<p><%= link_to 'Back to Quizzes', quizzes_path, class: "btn btn-primary" %></p>

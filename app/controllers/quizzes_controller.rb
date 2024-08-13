@@ -31,6 +31,10 @@ class QuizzesController < ApplicationController
     end
   end
 
+  def scoreboard
+    @scores = UserScore.where(quiz: @quiz).order(score: :desc)
+  end  
+
 # POST /quizzes/1/submit
 def submit
   answers_params = params[:answers] || {}

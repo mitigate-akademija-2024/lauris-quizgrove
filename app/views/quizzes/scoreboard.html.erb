@@ -1,0 +1,18 @@
+<h1>Scoreboard for <%= @quiz.title %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @scores.each do |user_score| %>
+      <tr>
+        <td><%= user_score.username %></td>
+        <td><%= user_score.score %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

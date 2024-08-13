@@ -1,0 +1,18 @@
+<h1>Overall Scoreboard</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Total Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @scores.each do |score| %>
+      <tr>
+        <td><%= score.username %></td>
+        <td><%= score.total_score %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

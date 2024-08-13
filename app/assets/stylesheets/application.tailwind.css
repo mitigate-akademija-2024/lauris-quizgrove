@@ -3,10 +3,7 @@
 @tailwind utilities;
 
  body {
-    background-image: url('/assets/images/background.jpeg');
-    background-size: cover; /* Ensure the image covers the entire background */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent image from repeating */
+    background-color: #aff12a;
 }
 
 /* html, */

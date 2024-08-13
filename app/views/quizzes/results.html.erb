@@ -1,24 +1,41 @@
-<h1>Quiz Results</h1>
-<% if @results.present? %>
-  <div class="mt-4">
-    <% @results.each do |result| %>
-      <% if result[:question].present? %>
-        <fieldset class="mt-4">
-          <legend class="text-lg font-semibold"><%= result[:question].question_text %></legend>
+<h1 class="font-bold text-2xl mb-4">Quiz Results</h1>
 
-          <% result[:question].answers.each do |answer| %>
-            <div class="mt-2">
-              <%= answer.answer_text %>
-              <% if answer.id == result[:selected_answer]&.id %>
-                <strong>
-                  <% if result[:correct] %>
-                    (Correct)
-                  <% else %>
-                    (Incorrect)
-                  <% end %>
-                </strong>
+<% if @user_score.present? %>
+  <p class="text-gray-500 mb-4">
+    Score: <%= @user_score.score %>
+  </p>
+
+  <div class="mt-4">
+    <% @results.each_with_index do |user_answer, index| %>
+      <% if user_answer.question.present? %>
+        <fieldset class="mt-6">
+          <legend class="text-lg font-semibold mb-2"><%= index + 1 %>. <%= user_answer.question.question_text %></legend>
+
+          <% if user_answer.question.answers.present? %>
+            <% user_answer.question.answers.each do |answer| %>
+              <div class="pl-4 mb-2">
+                <%= content_tag :span, answer.answer_text, class: "block p-2 #{answer.id == user_answer.answer_id ? 'bg-blue-100 text-blue-700' : 'text-gray-700'}" %>
+              </div>
+            <% end %>
+
+            <% correct_answer = user_answer.question.answers.find_by(correct: true) %>
+            <% if correct_answer.present? %>
+              <% if user_answer.answer == correct_answer %>
+                <div class="text-green-600 font-semibold mt-2">
+                  <i class="fas fa-check-circle"></i> Correct
+                </div>
+              <% else %>
+                <div class="text-red-600 font-semibold mt-2">
+                  <i class="fas fa-times-circle"></i> Incorrect: The correct answer is <%= correct_answer.answer_text %>.
+                </div>
               <% end %>
-            </div>
+            <% else %>
+              <div class="text-gray-600 font-semibold mt-2">
+                <i class="fas fa-exclamation-circle"></i> No correct answer specified.
+              </div>
+            <% end %>
+          <% else %>
+            <p>No answers available for this question.</p>
           <% end %>
         </fieldset>
       <% else %>
@@ -30,7 +47,7 @@
   <p>No results available.</p>
 <% end %>
 
-<p>
+<p class="mt-6">
   <%= link_to 'Back to Quizzes', quizzes_path, class: "inline-block rounded border border-brown-500 bg-brown-500 px-4 py-2 text-sm font-medium text-white hover:bg-brown-400 focus:outline-none focus:ring active:bg-brown-300" %>
 </p>
 

@@ -6,6 +6,10 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+
+  <% flash.each do |key, value| %>
+    <div class="flash <%= key %>"><%= value %></div>
+  <% end %>
 </head>
 <body class="bg-gray-100">
   <nav class="bg-green-600 p-4">
@@ -16,6 +20,13 @@
       <div>
         <%= link_to "Create Quiz", new_quiz_path, class: "text-white hover:bg-brown-700 px-4 py-2 rounded" %>
         <%= link_to "Show Quizzes", quizzes_path, class: "text-white hover:bg-brown-700 px-4 py-2 rounded" %>
+
+        <% if user_signed_in? %>
+          <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "text-white hover:bg-brown-700 px-4 py-2 rounded" %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "text-white hover:bg-brown-700 px-4 py-2 rounded" %>
+          <%= link_to "Sign Up", new_user_registration_path, class: "text-white hover:bg-brown-700 px-4 py-2 rounded" %>
+        <% end %>
       </div>
     </div>
   </nav>

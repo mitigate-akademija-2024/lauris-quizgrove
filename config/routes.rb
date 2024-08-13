@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'welcome#index'  # Sets the root path to the welcome page
 
   resources :quizzes do
     member do
-      get 'start'   # Route to start the quiz
-      post 'submit' # Route to submit the quiz
-      get 'results' # Route for the results page
+      get 'start'
+      post 'submit'
+      get 'results'
+      get 'export_results'
     end
 
     resources :questions, shallow: true
@@ -14,10 +16,11 @@ Rails.application.routes.draw do
   end
 
   # Additional routes if needed
-  get 'welcome/index' # Ensure this route exists
+  get 'welcome/index'
   get 'questions/index'
   get 'questions/start'
   get 'questions/test'
   get 'quizzes/results', to: 'quizzes#results', as: 'results'
   get "up" => "rails/health#show", as: :rails_health_check
+  get 'quizzes/:id/results/:attempt_id', to: 'quizzes#results', as: 'results_attempt_quiz'
 end

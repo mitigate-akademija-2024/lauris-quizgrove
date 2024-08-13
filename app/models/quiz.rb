@@ -1,4 +1,7 @@
 class Quiz < ApplicationRecord
+
+    belongs_to :user
+
     validates :title, presence: true, uniqueness: true
   
     before_validation :normalize_title
@@ -7,7 +10,7 @@ class Quiz < ApplicationRecord
   
     has_many :questions, dependent: :destroy
 
-    has_many :user_scores
+    has_many :user_scores, dependent: :destroy
   
     protected
   

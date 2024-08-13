@@ -10,7 +10,14 @@ class QuizzesController < ApplicationController
     @quizzes = Quiz.all
     @title = 'These are the quizzes'
     @description = ''
-  end
+
+    if params[:search].present?
+      search_term = "%#{params[:search].downcase}%"
+      @quizzes = Quiz.where("LOWER(title) LIKE ?", search_term)
+    else
+      @quizzes = Quiz.all
+    end
+end
 
   def find_anonymous_user
     # This could return a default user or create a new anonymous user record

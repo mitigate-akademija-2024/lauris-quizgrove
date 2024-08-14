@@ -26,7 +26,34 @@
 
 <%= link_to "New quiz", new_quiz_path, class: btn_class %>
 
- <%# add filter %>
+<!-- Pagination Links -->
+<div class="mt-4 flex justify-center">
+  <div class="flex space-x-2">
+    <!-- Previous Button -->
+    <% if @quizzes.previous_page %>
+      <%= link_to '← Previous', url_for(page: @quizzes.previous_page), class: "px-4 py-2 rounded-lg border bg-brown-500 text-white hover:bg-brown-600" %>
+    <% else %>
+      <span class="px-4 py-2 rounded-lg border bg-brown-300 text-white cursor-not-allowed">← Previous</span>
+    <% end %>
+
+    <!-- Page Numbers -->
+    <% (1..@quizzes.total_pages).each do |page_number| %>
+      <% if @quizzes.current_page == page_number %>
+        <span class="px-4 py-2 rounded-lg border bg-brown-700 text-white"><%= page_number %></span>
+      <% else %>
+        <%= link_to page_number, url_for(page: page_number), class: "px-4 py-2 rounded-lg border bg-brown-500 text-white hover:bg-brown-600" %>
+      <% end %>
+    <% end %>
+
+    <!-- Next Button -->
+    <% if @quizzes.next_page %>
+      <%= link_to 'Next →', url_for(page: @quizzes.next_page), class: "px-4 py-2 rounded-lg border bg-brown-500 text-white hover:bg-brown-600" %>
+    <% else %>
+      <span class="px-4 py-2 rounded-lg border bg-brown-300 text-white cursor-not-allowed">Next →</span>
+    <% end %>
+  </div>
+</div>
+
 
 
 

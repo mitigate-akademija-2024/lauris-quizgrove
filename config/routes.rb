@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   end
 
   get 'scoreboard', to: 'scoreboards#index'
+  get 'scoreboard/export', to: 'scoreboards#export', as: 'export_scoreboard'
 
   # Additional routes
   get 'welcome/index'

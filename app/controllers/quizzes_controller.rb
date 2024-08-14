@@ -19,6 +19,8 @@ class QuizzesController < ApplicationController
     else
       @quizzes = Quiz.all
     end
+
+    @quizzes = @quizzes.paginate(page: params[:page], per_page: 10)
   end
 
   def find_anonymous_user

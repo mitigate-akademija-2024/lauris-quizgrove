@@ -1,0 +1,20 @@
+/* app/assets/stylesheets/custom.css */
+.custom-brown-button {
+    background-color: #A0522D; /* Brown color */
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 9999px; /* Fully rounded */
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 10px; /* Adds space between buttons */
+    text-align: center;
+  }
+  
+  .custom-brown-button:hover {
+    background-color: #8B4513; /* Darker brown for hover effect */
+  }
+  
+  .custom-brown-button:active {
+    background-color: #5A2E10; /* Even darker brown when the button is clicked */
+  }

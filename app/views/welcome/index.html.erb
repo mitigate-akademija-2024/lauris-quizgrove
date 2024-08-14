@@ -7,15 +7,32 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
 </head>
-<body>
-  <h1 class="font-bold text-2xl">Welcome to QuizGrove</h1>
-  
-  <div class="mt-4">
-    <%= link_to "Create a New Quiz", new_quiz_path, class: "inline-block px-4 py-2 bg-brown-500 text-white rounded hover:bg-brown-600" %>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
+  <div class="container mx-auto p-8">
+    <header class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h1 class="text-4xl font-bold text-gray-800 text-center">Welcome to QuizGrove</h1>
+    </header>
+
+    <main class="bg-white shadow-md rounded-lg p-8">
+      <div class="text-center mb-6">
+        <p class="text-xl font-semibold text-gray-700 mb-4">
+          <span class="text-brown-500">Discover</span> a world where knowledge grows and curiosity blooms. 
+        </p>
+        <p class="text-lg text-gray-600 leading-relaxed">
+          At <span class="font-bold text-brown-600">QuizGrove</span>, every quiz is a journey to challenge your mind and expand your horizons. 
+          <br>
+          <span class="italic">"Embrace the challenge, celebrate your progress, and watch your knowledge flourish."</span>
+        </p>
+        <%= link_to new_user_registration_path, class: "inline-flex items-center px-6 py-3 bg-brown-500 text-white rounded-lg hover:bg-brown-600 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-500 mt-6" do %>
+          <span class="text-lg font-semibold">Sign Up for Free</span>
+          <svg class="w-5 h-5 ml-2 -mr-1 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m0 0l-7-7m7 7l-7 7"></path>
+          </svg>
+        <% end %>
+      </div>
+    </main>
   </div>
-  
-  <div class="mt-4">
-    <%= link_to "Show Quizzes", quizzes_path, class: "inline-block px-4 py-2 bg-brown-500 text-white rounded hover:bg-brown-600" %>
-  </div>
+
 </body>
-</html> 
+</html>

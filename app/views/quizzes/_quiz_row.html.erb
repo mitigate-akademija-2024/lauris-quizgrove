@@ -9,7 +9,11 @@
       <td class="whitespace-nowrap px-4 py-2 text-gray-700">
         <%= link_to "Edit", edit_quiz_path(quiz), class: 'inline-block rounded border border-brown-600 px-4 py-1 text-sm font-medium text-brown-600 hover:bg-brown-600 hover:text-white focus:outline-none focus:ring active:bg-brown-500' %>
       </td>
+    <% else %>
+      <td class="whitespace-nowrap px-4 py-2 text-gray-700"></td>
     <% end %>
+  <% else %>
+    <td class="whitespace-nowrap px-4 py-2 text-gray-700"></td>
   <% end %>
 
   <td class="whitespace-nowrap px-4 py-2 text-gray-700">

@@ -22,7 +22,6 @@ class QuizzesController < ApplicationController
 end
 
   def find_anonymous_user
-    # This could return a default user or create a new anonymous user record
     User.find_or_create_by(username: 'Anonymous')
   end
 
@@ -30,7 +29,7 @@ end
   def start
     @title = 'Start some quiz'
     @description = 'Something'
-    @questions = @quiz.questions.includes(:answers)  # Load questions and their answers for the quiz
+    @questions = @quiz.questions.includes(:answers)  
 
     respond_to do |format|
       format.html
@@ -137,7 +136,6 @@ end
     redirect_to quizzes_path, alert: 'Quiz not found.'
   end
 
-
   def export_results
   @quiz = Quiz.find(params[:id])
   @results = @quiz.user_scores
@@ -165,7 +163,7 @@ end
   def authorize_user!
     redirect_to quizzes_path, alert: "Not authorized" unless @quiz.user == current_user
   end
-    # Use callbacks to share common setup or constraints between actions.
+    
     def set_quiz
       @quiz = Quiz.find(params[:id])
     end
@@ -176,7 +174,6 @@ end
       end
     end
 
-    # Only allow a list of trusted parameters through.
     def quiz_params
       params.require(:quiz).permit(:title, :description)
     end

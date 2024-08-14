@@ -19,10 +19,13 @@ Rails.application.routes.draw do
 
   # Additional routes
   get 'welcome/index'
+  get 'welcome/login_index', to: 'welcome#login_index', as: 'login_index'
   get 'questions/index'
   get 'questions/start'
   get 'questions/test'
   get 'quizzes/results', to: 'quizzes#results', as: 'results'
   get 'quizzes/:id/results/:attempt_id', to: 'quizzes#results', as: 'results_attempt_quiz'
   get "up" => "rails/health#show", as: :rails_health_check
+
+  get 'dashboard', to: 'welcome#login_index'
 end

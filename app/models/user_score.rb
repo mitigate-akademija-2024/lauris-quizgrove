@@ -9,5 +9,6 @@
             select('username, SUM(score) as total_score')
             .group('username')
             .order('total_score DESC')
+            # .limit(10)
         end
     end

@@ -1,10 +1,19 @@
-<li class="nested-form-wrapper" data-new-record="<%= form.object.new_record? %>">
-  <%= form.label :answer_text %>
-  <%= form.text_field :answer_text %>
-  <%= form.check_box :correct %>
-
-  <button type="button" data-action="nested-form#remove" class='<%= btn_class_small %>'>Remove answer</button>
+<li class="nested-form-wrapper bg-gray-100 p-4 rounded-gl shadow-sm mb-4" data-new-record="<%= form.object.new_record? %>">
+  <div class="mb-2">
+    <%= form.label :answer_text, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.text_field :answer_text, class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-brown-500 focus:border-brown-500" %>
+  </div>
+  
+  <div class="flex items-center mb-2">
+    <%= form.check_box :correct, class: "h-4 w-4 text-green-600 border-black-300 rounded focus:ring-brown-500" %>
+    <%= form.label :correct, "Correct", class: "ml-2 block text-sm font-medium text-gray-700" %>
+  </div>
+  
+  <div class="flex justify-end">
+    <button type="button" data-action="nested-form#remove" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+      Remove Answer
+    </button>
+  </div>
 
   <%= form.hidden_field :_destroy %>
 </li>
-    

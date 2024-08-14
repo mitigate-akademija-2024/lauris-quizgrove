@@ -1,9 +1,9 @@
-<h1 class="text-2xl">Editing question</h1>
+<h1 class="text-3xl font-bold mb-4 text-gray-800">Editing Question</h1>
 
-<%= render "form", question: @question %>
+<div class="bg-white p-6 rounded-lg shadow-md">
+  <%= render "form", question: @question %>
+</div>
 
-<br>
-
-<div>
-  <%= link_to "Back to question", quizzes_path, class: "inline-block rounded border border-brown-500 bg-brown-500 px-4 py-2 text-sm font-medium text-white hover:bg-brown-400 focus:outline-none focus:ring active:bg-brown-300" %>
+<div class="mt-6">
+  <%= link_to "Back to Question", quizzes_path, class: "inline-block rounded-md bg-gradient-to-r from-brown-500 to-brown-700 px-6 py-2 text-base font-semibold text-white shadow-sm hover:from-brown-600 hover:to-brown-800 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-offset-2" %>
 </div>

@@ -1,9 +1,8 @@
-<%= form_with(model: quiz) do |form| %>
+<%= form_with(model: quiz, class: 'space-y-4') do |form| %>
   <% if quiz.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
-
-      <ul>
+    <div class="text-red-600">
+      <h2 class="font-semibold text-sm"><%= pluralize(quiz.errors.count, "error") %> prohibited this quiz from being saved:</h2>
+      <ul class="text-xs list-disc list-inside mt-2">
         <% quiz.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -12,16 +11,16 @@
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+    <%= form.label :title, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :title, class: "mt-1 block w-1/4 px-3 py-2 border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-brown-500" %>
   </div>
 
   <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+    <%= form.label :description, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :description, class: "mt-1 block w-1/4 px-3 py-2 border border-gray-300 rounded-md text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-brown-500" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mt-4">
+    <%= form.submit 'Save Quiz', class: 'inline-block px-4 py-2 text-sm text-white bg-green-600 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500' %>
   </div>
 <% end %>

@@ -1,6 +1,8 @@
-class Answer < ApplicationRecord
-   validates :answer_text, presence: true
+# frozen_string_literal: true
 
-   has_many :user_answers
-   belongs_to :question
-  end
+class Answer < ApplicationRecord
+  validates :answer_text, presence: true
+
+  has_many :user_answers
+  belongs_to :question
+end

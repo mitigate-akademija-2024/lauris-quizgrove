@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
   def btn_class
     'inline-block rounded border border-brown-600 bg-brown-600 px-12 py-3 text-sm font-medium text-white hover:bg-transparent hover:text-brown-600 focus:outline-none focus:ring active:text-brown-500'

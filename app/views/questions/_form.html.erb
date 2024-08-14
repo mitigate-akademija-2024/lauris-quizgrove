@@ -26,12 +26,12 @@
         <%= render 'answer_form', form: ff %>
       <% end %>
     <% end %>
-
-    <!-- Inserted elements will be injected before that target. -->
-    <div data-nested-form-target="target"></div>
-
-    <button type="button" data-action="nested-form#add" class='<%= btn_class_small %>'>Add answer</button>
   </div>
+
+  <!-- Inserted elements will be injected before that target. -->
+  <div data-nested-form-target="target"></div>
+
+  <button type="button" data-action="nested-form#add" class='<%= btn_class_small %>'>Add answer</button>
 
   <div class="mt-4 inline-block rounded border border-green-500 bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-400 focus:outline-none focus:ring active:bg-green-300">
     <%= form.submit %>

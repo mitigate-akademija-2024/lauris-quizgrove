@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
   root 'welcome#index'
@@ -25,7 +27,7 @@ Rails.application.routes.draw do
   get 'questions/test'
   get 'quizzes/results', to: 'quizzes#results', as: 'results'
   get 'quizzes/:id/results/:attempt_id', to: 'quizzes#results', as: 'results_attempt_quiz'
-  get "up" => "rails/health#show", as: :rails_health_check
+  get 'up' => 'rails/health#show', as: :rails_health_check
 
   get 'dashboard', to: 'welcome#login_index'
 end

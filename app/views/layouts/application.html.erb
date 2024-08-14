@@ -18,8 +18,10 @@
 <body class="bg-gray-100 flex flex-col min-h-screen">
   <nav class="bg-green-600 p-4">
     <div class="container mx-auto flex justify-between items-center">
+    <%= image_tag 'logo.jpg', size: '50x50', alt: 'Logo' %>
       <div class="text-white text-2xl font-bold">
         <%= link_to "QuizGrove", root_path, class: "hover:underline" %>
+        
       </div>
       <div class="flex items-center space-x-4">
         <%= link_to "Show Quizzes", quizzes_path, class: "text-white hover:bg-brown-700 px-4 py-2 rounded" %>

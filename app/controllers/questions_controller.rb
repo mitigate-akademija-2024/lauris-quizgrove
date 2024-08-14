@@ -1,24 +1,23 @@
-class QuestionsController < ApplicationController
-  before_action :set_quiz, only: [:new, :create]
-  before_action :set_question, only: [:destroy, :edit, :update]
+# frozen_string_literal: true
 
-  def index
-  end
+class QuestionsController < ApplicationController
+  before_action :set_quiz, only: %i[new create]
+  before_action :set_question, only: %i[destroy edit update]
+
+  def index; end
 
   def create
     @question = @quiz.questions.new(question_params)
 
-    if params[:commit] == "add_answer"
+    if params[:commit] == 'add_answer'
       @question.answers.new
       render :new, status: :unprocessable_entity
-    else
+    elsif @question.save
 
-      if @question.save
-        flash.notice = "Question was successfully created."
-        redirect_to quiz_url(@quiz)
-      else
-        render :new, status: :unprocessable_entity
-      end
+      flash.notice = 'Question was successfully created.'
+      redirect_to quiz_url(@quiz)
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -27,12 +26,11 @@ class QuestionsController < ApplicationController
     @question.answers.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @question.update(question_params)
-      redirect_to quiz_url(@question.quiz), notice: "Question was successfully updated."
+      redirect_to quiz_url(@question.quiz), notice: 'Question was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,21 +38,19 @@ class QuestionsController < ApplicationController
 
   def add_answer
     @question = @quiz.questions.new(question_params)
-    @question.answers.build #or new..
-  
+    @question.answers.new # or new..
+
     render :new
   end
 
-  
   # GET /questions/1
-  def show
-  end
+  def show; end
 
   # DELETE /questions/1
   def destroy
     @question.destroy!
 
-    redirect_to quiz_path(@question.quiz), notice: "Question was successfully destroyed."
+    redirect_to quiz_path(@question.quiz), notice: 'Question was successfully destroyed.'
   end
 
   private
@@ -68,6 +64,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:question_text, answers_attributes: [:id, :answer_text, :correct, :_destroy])
+    params.require(:question).permit(:question_text, answers_attributes: %i[id answer_text correct _destroy])
   end
 end

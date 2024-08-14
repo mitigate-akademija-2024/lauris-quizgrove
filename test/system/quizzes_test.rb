@@ -1,43 +1,45 @@
-require "application_system_test_case"
+# frozen_string_literal: true
+
+require 'application_system_test_case'
 
 class QuizzesTest < ApplicationSystemTestCase
   setup do
     @quiz = quizzes(:one)
   end
 
-  test "visiting the index" do
+  test 'visiting the index' do
     visit quizzes_url
-    assert_selector "h1", text: "Quizzes"
+    assert_selector 'h1', text: 'Quizzes'
   end
 
-  test "should create quiz" do
+  test 'should create quiz' do
     visit quizzes_url
-    click_on "New quiz"
+    click_on 'New quiz'
 
-    fill_in "Description", with: @quiz.description
-    fill_in "Title", with: @quiz.title
-    click_on "Create Quiz"
+    fill_in 'Description', with: @quiz.description
+    fill_in 'Title', with: @quiz.title
+    click_on 'Create Quiz'
 
-    assert_text "Quiz was successfully created"
-    click_on "Back"
+    assert_text 'Quiz was successfully created'
+    click_on 'Back'
   end
 
-  test "should update Quiz" do
+  test 'should update Quiz' do
     visit quiz_url(@quiz)
-    click_on "Edit this quiz", match: :first
+    click_on 'Edit this quiz', match: :first
 
-    fill_in "Description", with: @quiz.description
-    fill_in "Title", with: @quiz.title
-    click_on "Update Quiz"
+    fill_in 'Description', with: @quiz.description
+    fill_in 'Title', with: @quiz.title
+    click_on 'Update Quiz'
 
-    assert_text "Quiz was successfully updated"
-    click_on "Back"
+    assert_text 'Quiz was successfully updated'
+    click_on 'Back'
   end
 
-  test "should destroy Quiz" do
+  test 'should destroy Quiz' do
     visit quiz_url(@quiz)
-    click_on "Destroy this quiz", match: :first
+    click_on 'Destroy this quiz', match: :first
 
-    assert_text "Quiz was successfully destroyed"
+    assert_text 'Quiz was successfully destroyed'
   end
 end

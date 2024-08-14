@@ -14,7 +14,7 @@
           <% if user_answer.question.answers.present? %>
             <% user_answer.question.answers.each do |answer| %>
               <div class="pl-4 mb-2">
-                <%= content_tag :span, answer.answer_text, class: "block p-2 #{answer.id == user_answer.answer_id ? 'bg-blue-100 text-blue-700' : 'text-gray-700'}" %>
+                <%= content_tag :span, answer.answer_text, class: "block p-2 #{answer.id == user_answer.answer_id ? 'bg-green-300 text-black-700' : 'text-gray-700'}" %>
               </div>
             <% end %>
 

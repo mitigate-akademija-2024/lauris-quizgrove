@@ -9,22 +9,26 @@ class QuizzesController < ApplicationController
 
   # GET /quizzes or /quizzes.json
   def index
-    @quizzes = Quiz.all
     @title = 'These are the quizzes'
     @description = ''
 
+    @quizzes = Quiz.all
+
     if params[:search].present?
       search_term = "%#{params[:search].downcase}%"
-      @quizzes = Quiz.where('LOWER(title) LIKE ?', search_term)
-    else
-      @quizzes = Quiz.all
+      @quizzes = @quizzes.where('LOWER(title) LIKE ?', search_term)
     end
 
-    @quizzes = @quizzes.paginate(page: params[:page], per_page: 10)
-  end
+    @quizzes = case params[:sort]
+               when 'newest'
+                 @quizzes.order(created_at: :desc)
+               when 'oldest'
+                 @quizzes.order(created_at: :asc)
+               else
+                 @quizzes.order(id: :asc) # Default sorting by ID in ascending order
+               end
 
-  def find_anonymous_user
-    User.find_or_create_by(username: 'Anonymous')
+    @quizzes = @quizzes.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /quizzes/1/start

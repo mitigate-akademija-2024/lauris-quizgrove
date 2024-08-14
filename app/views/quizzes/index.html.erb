@@ -1,11 +1,21 @@
 <h1 class="font-bold text-2xl"><%= @title %></h1>
 <p><%= @description %></p>
 
-<!-- Search Form -->
-<form method="get" action="<%= quizzes_path %>" class="mb-4 flex items-center">
+<!-- Search and Filter Form -->
+<form method="get" action="<%= quizzes_path %>" class="mb-4 flex items-center space-x-4" id="search-form">
   <input type="text" name="search" placeholder="Search quizzes..." value="<%= params[:search] %>" class="rounded border border-grey-300 px-4 py-2 w-full md:w-1/4">
+  
+  <!-- Sort Dropdown with default value -->
+  <select name="sort" class="ml-6 rounded border border-grey-300 px-54 py-2" onchange="submitForm()">
+    <option value="newest" <%= 'selected' if params[:sort] == 'newest' %>>New</option>
+    <option value="oldest" <%= 'selected' if params[:sort] == 'oldest' %>>Old</option>
+  </select>
+  
+  <!-- Search Button -->
   <button type="submit" class="ml-2 bg-brown-500 hover:bg-brown-700 text-white py-2 px-4 rounded">Search</button>
-  <button type="submit" name="search" value="" class="ml-2 bg-brown-500 hover:bg-brown-700 text-white py-2 px-4 rounded">Clear</button>
+  
+  <!-- Clear Button -->
+  <button type="button" onclick="clearFilters()" class="ml-2 bg-brown-500 hover:bg-brown-700 text-white py-2 px-4 rounded">Clear</button>
 </form>
 
 <div class="overflow-x-auto rounded-lg border border-gray-200">
@@ -31,7 +41,7 @@
   <div class="flex space-x-2">
     <!-- Previous Button -->
     <% if @quizzes.previous_page %>
-      <%= link_to '← Previous', url_for(page: @quizzes.previous_page), class: "px-4 py-2 rounded-lg border bg-brown-500 text-white hover:bg-brown-600" %>
+      <%= link_to '← Previous', url_for(page: @quizzes.previous_page, search: params[:search], sort: params[:sort]), class: "px-4 py-2 rounded-lg border bg-brown-500 text-white hover:bg-brown-600" %>
     <% else %>
       <span class="px-4 py-2 rounded-lg border bg-brown-300 text-white cursor-not-allowed">← Previous</span>
     <% end %>
@@ -41,20 +51,28 @@
       <% if @quizzes.current_page == page_number %>
         <span class="px-4 py-2 rounded-lg border bg-brown-700 text-white"><%= page_number %></span>
       <% else %>
-        <%= link_to page_number, url_for(page: page_number), class: "px-4 py-2 rounded-lg border bg-brown-500 text-white hover:bg-brown-600" %>
+        <%= link_to page_number, url_for(page: page_number, search: params[:search], sort: params[:sort]), class: "px-4 py-2 rounded-lg border bg-brown-500 text-white hover:bg-brown-600" %>
       <% end %>
     <% end %>
 
     <!-- Next Button -->
     <% if @quizzes.next_page %>
-      <%= link_to 'Next →', url_for(page: @quizzes.next_page), class: "px-4 py-2 rounded-lg border bg-brown-500 text-white hover:bg-brown-600" %>
+      <%= link_to 'Next →', url_for(page: @quizzes.next_page, search: params[:search], sort: params[:sort]), class: "px-4 py-2 rounded-lg border bg-brown-500 text-white hover:bg-brown-600" %>
     <% else %>
       <span class="px-4 py-2 rounded-lg border bg-brown-300 text-white cursor-not-allowed">Next →</span>
     <% end %>
   </div>
 </div>
 
+<script>
+  function submitForm() {
+    document.getElementById('search-form').submit();
+  }
 
-
-
-  
+  function clearFilters() {
+    const form = document.getElementById('search-form');
+    form.reset();
+    // Redirect to the default filtered view sorted by ID in ascending order
+    window.location.href = "<%= quizzes_path %>?sort=oldest"; 
+  }
+</script>

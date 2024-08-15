@@ -38,7 +38,7 @@ class QuestionsController < ApplicationController
 
   def add_answer
     @question = @quiz.questions.new(question_params)
-    @question.answers.new # or new..
+    @question.answers.new
 
     render :new
   end

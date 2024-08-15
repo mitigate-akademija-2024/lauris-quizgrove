@@ -5,7 +5,6 @@ class QuizzesController < ApplicationController
   before_action :ensure_quiz_has_questions, only: %i[start submit results]
   before_action :authenticate_user!, only: %i[new create edit update destroy]
   before_action :authorize_user!, only: %i[edit update destroy]
-  # before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   # GET /quizzes or /quizzes.json
   def index
@@ -25,7 +24,7 @@ class QuizzesController < ApplicationController
                when 'oldest'
                  @quizzes.order(created_at: :asc)
                else
-                 @quizzes.order(id: :desc) # Default sorting by ID in ascending order
+                 @quizzes.order(id: :desc) # defaults
                end
 
     @quizzes = @quizzes.paginate(page: params[:page], per_page: 10)
@@ -104,7 +103,7 @@ class QuizzesController < ApplicationController
 
   # POST /quizzes or /quizzes.json
   def create
-    @quiz = current_user.quizzes.new(quiz_params) # Ensure user association here
+    @quiz = current_user.quizzes.new(quiz_params)
 
     if @quiz.save
       redirect_to quiz_url(@quiz), notice: 'Quiz was successfully created.'

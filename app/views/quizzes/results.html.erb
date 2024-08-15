@@ -18,13 +18,13 @@
             <% user_answer.question.answers.each do |answer| %>
               <div class="pl-4 mb-2 flex items-center">
                 <% css_class = if answer == correct_answer
-                                'text-green-600'  # Correct answer styling
+                                'text-green-600'  
                               elsif answer == user_selected_answer
-                                'text-red-600'  # Incorrect answer styling
+                                'text-red-600'  
                               else
                                 'text-gray-700'
                               end %>
-
+                              
                 <%= content_tag :span, class: "block p-2 #{css_class}" do %>
                   <% if answer == correct_answer %>
                     <i class="fas fa-check-circle"></i> <%= answer.answer_text %>

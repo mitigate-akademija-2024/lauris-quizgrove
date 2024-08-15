@@ -72,7 +72,6 @@
   function clearFilters() {
     const form = document.getElementById('search-form');
     form.reset();
-    // Redirect to the default filtered view sorted by ID in ascending order
     window.location.href = "<%= quizzes_path %>?sort=oldest"; 
   }
 </script>

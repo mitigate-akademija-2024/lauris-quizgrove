@@ -1,11 +1,10 @@
 <%= form_with(model: question.persisted? ? question : [question.quiz, question], data: { controller: 'nested-form', nested_form_wrapper_selector_value: '.nested-form-wrapper' }) do |form| %>
   <% if question.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
-
+    <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+      <h2 class="font-bold"><%= pluralize(question.errors.count, "error") %> prohibited this question from being saved:</h2>
       <ul>
-        <% question.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% question.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
@@ -17,9 +16,9 @@
     <% end %>
   </template>
 
-  <div>
-    <%= form.label :question_text %>
-    <%= form.text_field :question_text %>
+  <div class="mb-6">
+    <%= form.label :question_text, "Question Text", class: "block text-gray-700 text-sm font-bold mb-2" %>
+    <%= form.text_field :question_text, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-brown-500 focus:ring focus:ring-brown-500 " %>
 
     <%= form.fields_for :answers do |ff| %>
       <% unless ff.object.marked_for_destruction? %>
@@ -28,14 +27,15 @@
     <% end %>
   </div>
 
-  <!-- Inserted elements will be injected before that target. -->
   <div data-nested-form-target="target"></div>
 
-  <button type="button" data-action="nested-form#add" class='<%= btn_class %>'>Add answer</button>
-
-  <div class="mt-4 inline-block rounded border border-green-500 bg-green-500 px-4 py-2 text-sm font-medium text-white hover:bg-green-400 focus:outline-none focus:ring active:bg-green-300">
-    <%= form.submit %>
-    <%# <%= form.submit :add_answer %> 
+  <div class="flex items-center space-x-4">
+    <div class="mt-4 inline-block rounded-md bg-gradient-to-r from-green-400 to-green-600 px-6 py-3 text-base font-medium text-white hover:from-green-500 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+      <%= form.submit %>
+    </div>
+    <button type="button" data-action="nested-form#add" class='mt-4 inline-block rounded-md bg-brown-500 px-4 py-2 text-sm text-white hover:bg-brown-600 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-offset-2'>
+      Add answer
+    </button>
   </div>
 <% end %>
 

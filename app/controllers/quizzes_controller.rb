@@ -25,7 +25,7 @@ class QuizzesController < ApplicationController
                when 'oldest'
                  @quizzes.order(created_at: :asc)
                else
-                 @quizzes.order(id: :asc) # Default sorting by ID in ascending order
+                 @quizzes.order(id: :desc) # Default sorting by ID in ascending order
                end
 
     @quizzes = @quizzes.paginate(page: params[:page], per_page: 10)

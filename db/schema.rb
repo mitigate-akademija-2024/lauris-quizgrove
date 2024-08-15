@@ -75,7 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_813_130_857) do
 
   add_foreign_key 'answers', 'questions'
   add_foreign_key 'questions', 'quizzes'
-  add_foreign_key 'questions', 'quizzes', on_delete: :cascade
+  add_foreign_key 'questions', 'quizzes', on_delete: :cascade #this one messes up, should remove
   add_foreign_key 'quizzes', 'users'
   add_foreign_key 'user_answers', 'answers'
   add_foreign_key 'user_answers', 'questions'
